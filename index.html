@@ -19,20 +19,27 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": "BusOrCoach",
     "name": "Mansehra Express",
     "url": "https://mansehraexpress.com",
     "telephone": "+92-313-333-4227",
     "email": "contact@ticketpakistan.com",
-    "sameAs": ["https://ticketpakistan.com"],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+92-313-333-4227",
-      "contactType": "customer service",
-      "availableLanguage": ["English", "Urdu"]
-    }
+    "provider": {
+      "@type": "Organization",
+      "name": "TicketPakistan",
+      "url": "https://ticketpakistan.com"
+    },
+    "potentialAction": {
+      "@type": "ReserveAction",
+      "target": "https://ticketpakistan.com/",
+      "name": "Book Mansehra Express Tickets at TicketPakistan.com"
+    },
+    "areaServed": "Pakistan",
+    "availableLanguage": ["English", "Urdu"]
   }
   </script>
+  <link rel="icon" href="https://ticketpakistan.com/favicon.ico" type="image/x-icon" />
+  <link rel="preload" as="image" href="faisal_mosque.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -550,7 +557,7 @@
 
   <!-- NAV -->
   <nav>
-    <a class="nav-brand" href="#"><span>Mansehra</span> Express</a>
+    <a class="nav-brand" href="https://mansehraexpress.com/"><span>Mansehra</span> Express</a>
     <a class="nav-cta" href="https://ticketpakistan.com/" target="_blank" rel="noopener">Book Tickets</a>
   </nav>
 
