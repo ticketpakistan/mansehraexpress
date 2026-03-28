@@ -67,7 +67,8 @@
     .hero {
       position: relative;
       min-height: 100vh;
-      display: flex; align-items: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       background: var(--green-dark);
       overflow: hidden;
       padding-top: 5rem;
@@ -95,31 +96,80 @@
       pointer-events: none;
     }
 
-    /* diagonal gold slice */
-    .hero::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; right: 0;
-      width: 55%; height: 100%;
-      background: linear-gradient(135deg, transparent 40%, rgba(245,166,35,0.07) 40%);
-      pointer-events: none;
+    /* hero right panel */
+    .hero-panel-wrap {
+      display: flex; align-items: center; justify-content: center;
+      padding: 3rem 4rem 3rem 2rem;
+      position: relative; z-index: 2;
     }
+    .hero-panel {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(245,166,35,0.25);
+      border-radius: 6px;
+      padding: 2.5rem;
+      width: 100%; max-width: 380px;
+      backdrop-filter: blur(8px);
+      position: relative;
+    }
+    .hero-panel::before {
+      content: '';
+      position: absolute; top: 0; left: 2rem; right: 2rem;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .hero-panel-icon {
+      width: 52px; height: 52px;
+      background: rgba(245,166,35,0.12);
+      border: 1px solid rgba(245,166,35,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
+    }
+    .hero-panel-icon svg { color: var(--gold); width: 22px; height: 22px; }
+    .hero-panel h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .hero-panel p {
+      font-size: 0.88rem; color: var(--text-light);
+      line-height: 1.65; margin-bottom: 1.5rem;
+      opacity: 0.75;
+    }
+    .hero-panel .btn-primary { width: 100%; justify-content: center; margin-bottom: 0.8rem; }
+    .hero-panel-divider {
+      display: flex; align-items: center; gap: 0.8rem;
+      color: rgba(255,255,255,0.3); font-size: 0.75rem;
+      letter-spacing: 0.1em; margin-bottom: 0.8rem;
+    }
+    .hero-panel-divider::before, .hero-panel-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(255,255,255,0.1);
+    }
+    .btn-wa {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      width: 100%;
+      background: transparent; color: var(--text-light);
+      font-weight: 500; font-size: 0.9rem;
+      padding: 0.75rem;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 2px;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-wa:hover { border-color: #25d366; color: #25d366; }
+    .hero-panel-info {
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.8rem; color: rgba(255,255,255,0.4);
+    }
+    .hero-panel-info svg { color: var(--gold); opacity: 0.6; width: 14px; height: 14px; flex-shrink: 0; }
 
     /* large decorative circle */
     .hero-circle {
-      position: absolute;
-      right: -120px; top: 50%;
-      transform: translateY(-50%);
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(245,166,35,0.15);
-      pointer-events: none;
-    }
-    .hero-circle::before {
-      content: '';
-      position: absolute; inset: 40px;
-      border-radius: 50%;
-      border: 1px solid rgba(245,166,35,0.1);
+      display: none;
     }
 
     .hero-content {
@@ -399,9 +449,13 @@
     .delay-3 { animation-delay: 0.35s; }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-panel-wrap { padding: 2rem 1.5rem 3rem; }
+    }
     @media (max-width: 640px) {
       nav { padding: 1rem 1.2rem; }
-      .hero-content { padding: 3rem 1.5rem; }
+      .hero-content { padding: 3rem 1.5rem 1.5rem; }
       .booking-card { padding: 2rem 1.5rem; }
       .trust-bar { gap: 1.2rem; }
       footer { flex-direction: column; text-align: center; }
@@ -418,23 +472,43 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-circle"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">Long-Distance Coach Service</div>
       <h1>Mansehra<br /><span class="accent">Express</span></h1>
       <p class="hero-tagline">Your Trusted Travel Partner</p>
       <div class="hero-divider"></div>
       <p class="hero-desc">
-        Book your Mansehra Express tickets online at TicketPakistan.com — or call/WhatsApp us directly at <strong style="color:var(--gold)">+92 313 333 4227</strong> to reserve your seat.
+        Reliable long-distance coach travel across Pakistan. Book your seat online or contact us directly.
       </p>
       <div class="hero-actions">
         <a class="btn-primary" href="https://ticketpakistan.com/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M10 14L21 3M21 15v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6"/></svg>
           Book Tickets Now
         </a>
-        <a class="btn-secondary" href="#contact">
-          Contact Us
+        <a class="btn-secondary" href="#contact">Contact Us</a>
+      </div>
+    </div>
+
+    <div class="hero-panel-wrap">
+      <div class="hero-panel">
+        <div class="hero-panel-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Book Your Ticket</h3>
+        <p>Choose your route, pick your seat, and confirm your Mansehra Express booking in minutes at TicketPakistan.com.</p>
+        <a class="btn-primary" href="https://ticketpakistan.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M15 3h6v6M10 14L21 3M21 15v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6"/></svg>
+          Go to TicketPakistan.com
         </a>
+        <div class="hero-panel-divider">or</div>
+        <a class="btn-wa" href="https://wa.me/923133334227" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          WhatsApp +92 313 333 4227
+        </a>
+        <div class="hero-panel-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.07 2.18 2 2 0 012.06 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+          Also available on call: +92 313 333 4227
+        </div>
       </div>
     </div>
   </section>
