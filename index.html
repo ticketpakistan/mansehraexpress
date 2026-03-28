@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mansehra Express — Book Tickets Online</title>
+  <meta name="description" content="Book Mansehra Express coach tickets online at TicketPakistan.com. Fast, reliable, and comfortable intercity travel across Pakistan." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:       #1a5c38;
+      --green-dark:  #0f3a22;
+      --green-mid:   #246b43;
+      --gold:        #f5a623;
+      --gold-light:  #ffc84a;
+      --gold-dim:    #c97f10;
+      --cream:       #fdf8ef;
+      --text-light:  #e8f0ec;
+      --white:       #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--cream);
+      color: var(--green-dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: rgba(15,58,34,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(245,166,35,0.18);
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--white); }
+    .nav-cta {
+      background: var(--gold);
+      color: var(--green-dark);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600; font-size: 0.85rem;
+      padding: 0.55rem 1.4rem;
+      border-radius: 2px;
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex; align-items: center;
+      background: var(--green-dark);
+      overflow: hidden;
+      padding-top: 5rem;
+    }
+
+    /* geometric pattern overlay */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(
+          60deg,
+          transparent,
+          transparent 38px,
+          rgba(245,166,35,0.04) 38px,
+          rgba(245,166,35,0.04) 40px
+        ),
+        repeating-linear-gradient(
+          -60deg,
+          transparent,
+          transparent 38px,
+          rgba(245,166,35,0.04) 38px,
+          rgba(245,166,35,0.04) 40px
+        );
+      pointer-events: none;
+    }
+
+    /* diagonal gold slice */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; right: 0;
+      width: 55%; height: 100%;
+      background: linear-gradient(135deg, transparent 40%, rgba(245,166,35,0.07) 40%);
+      pointer-events: none;
+    }
+
+    /* large decorative circle */
+    .hero-circle {
+      position: absolute;
+      right: -120px; top: 50%;
+      transform: translateY(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(245,166,35,0.15);
+      pointer-events: none;
+    }
+    .hero-circle::before {
+      content: '';
+      position: absolute; inset: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,166,35,0.1);
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 780px;
+      padding: 4rem 2.5rem 4rem 6vw;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block; width: 32px; height: 1.5px;
+      background: var(--gold);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 7vw, 6rem);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .hero h1 .accent { color: var(--gold); }
+
+    .hero-tagline {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      color: var(--text-light);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+
+    .hero-divider {
+      width: 56px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin-bottom: 2rem;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem; font-weight: 400;
+      color: var(--text-light);
+      line-height: 1.7;
+      max-width: 500px;
+      margin-bottom: 2.8rem;
+      opacity: 0.85;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      background: var(--gold);
+      color: var(--green-dark);
+      font-weight: 700; font-size: 1rem;
+      padding: 1rem 2.2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(245,166,35,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(245,166,35,0.45);
+    }
+    .btn-primary svg { width: 18px; height: 18px; }
+
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: transparent;
+      color: var(--text-light);
+      font-weight: 500; font-size: 0.95rem;
+      padding: 1rem 1.8rem;
+      border: 1px solid rgba(245,166,35,0.35);
+      border-radius: 2px;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(245,166,35,0.06);
+    }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--green);
+      padding: 1.2rem 2.5rem;
+      display: flex; align-items: center; justify-content: center;
+      gap: 3rem; flex-wrap: wrap;
+      border-bottom: 2px solid var(--gold);
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      color: var(--text-light);
+      font-size: 0.85rem; font-weight: 400; letter-spacing: 0.05em;
+    }
+    .trust-item svg { color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ── BOOKING SECTION ── */
+    .booking-section {
+      background: var(--cream);
+      padding: 7rem 2.5rem;
+      text-align: center;
+    }
+    .section-label {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.8rem;
+    }
+    .section-label::before, .section-label::after {
+      content: ''; display: block; width: 28px; height: 1px; background: var(--gold-dim);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 1.2rem;
+      line-height: 1.15;
+    }
+    .section-body {
+      font-size: 1.05rem; color: #3a5c49; line-height: 1.75;
+      max-width: 540px; margin: 0 auto 3rem;
+    }
+
+    .booking-card {
+      display: inline-block;
+      background: var(--green-dark);
+      border-radius: 4px;
+      padding: 3rem 3.5rem;
+      box-shadow: 0 20px 60px rgba(15,58,34,0.18);
+      max-width: 480px; width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .booking-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+    }
+    .booking-card-icon {
+      width: 64px; height: 64px;
+      background: rgba(245,166,35,0.12);
+      border: 1px solid rgba(245,166,35,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .booking-card-icon svg { color: var(--gold); width: 28px; height: 28px; }
+    .booking-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.7rem;
+    }
+    .booking-card p {
+      color: var(--text-light); font-size: 0.95rem;
+      line-height: 1.6; opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+    .booking-card .btn-primary { width: 100%; justify-content: center; font-size: 1.05rem; }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      background: var(--green-dark);
+      padding: 7rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-section::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      border: 1px solid rgba(245,166,35,0.1);
+      pointer-events: none;
+    }
+    .contact-inner {
+      max-width: 900px; margin: 0 auto;
+      text-align: center;
+    }
+    .contact-inner .section-label { color: var(--gold); }
+    .contact-inner .section-label::before,
+    .contact-inner .section-label::after { background: var(--gold); }
+    .contact-inner .section-title { color: var(--white); }
+    .contact-inner .section-body { color: var(--text-light); opacity: 0.75; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+    .contact-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(245,166,35,0.15);
+      border-radius: 4px;
+      padding: 2rem 1.5rem;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+    }
+    .contact-card:hover {
+      background: rgba(245,166,35,0.07);
+      border-color: rgba(245,166,35,0.45);
+      transform: translateY(-3px);
+    }
+    .contact-card-icon {
+      width: 48px; height: 48px;
+      background: rgba(245,166,35,0.1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-card-icon svg { color: var(--gold); width: 22px; height: 22px; }
+    .contact-card-label {
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7;
+    }
+    .contact-card-value {
+      font-size: 0.95rem; color: var(--text-light);
+      text-align: center; line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a2416;
+      padding: 2rem 2.5rem;
+      border-top: 1px solid rgba(245,166,35,0.12);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--gold);
+    }
+    .footer-brand span { color: rgba(255,255,255,0.5); }
+    .footer-copy {
+      font-size: 0.78rem; color: rgba(255,255,255,0.35);
+      letter-spacing: 0.04em;
+    }
+    .footer-link {
+      font-size: 0.78rem; color: rgba(245,166,35,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-link:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .animate {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.35s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.2rem; }
+      .hero-content { padding: 3rem 1.5rem; }
+      .booking-card { padding: 2rem 1.5rem; }
+      .trust-bar { gap: 1.2rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-brand" href="#"><span>Mansehra</span> Express</a>
+    <a class="nav-cta" href="https://ticketpakistan.com/" target="_blank" rel="noopener">Book Tickets</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-circle"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Pakistan's Intercity Travel</div>
+      <h1>Mansehra<br /><span class="accent">Express</span></h1>
+      <p class="hero-tagline">Your Trusted Travel Partner</p>
+      <div class="hero-divider"></div>
+      <p class="hero-desc">
+        Book your Mansehra Express tickets online — safely, quickly, and from the comfort of your home. Powered by TicketPakistan.com.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="https://ticketpakistan.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M10 14L21 3M21 15v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6"/></svg>
+          Book Tickets Now
+        </a>
+        <a class="btn-secondary" href="#contact">
+          Contact Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Secure Online Booking
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Instant Confirmation
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      Available on All Devices
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      Trusted by Thousands
+    </div>
+  </div>
+
+  <!-- BOOKING SECTION -->
+  <section class="booking-section">
+    <div class="section-label">Online Ticketing</div>
+    <h2 class="section-title animate">Buy Your Ticket in Minutes</h2>
+    <p class="section-body animate delay-1">
+      Mansehra Express tickets are available online through TicketPakistan.com. No queues, no hassle — choose your seat and pay online.
+    </p>
+    <div class="animate delay-2">
+      <div class="booking-card">
+        <div class="booking-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Book at TicketPakistan</h3>
+        <p>Visit TicketPakistan.com to view available seats, select your journey, and confirm your Mansehra Express booking online.</p>
+        <a class="btn-primary" href="https://ticketpakistan.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M10 14L21 3M21 15v6a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h6"/></svg>
+          Go to TicketPakistan.com
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="contact-inner">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Contact Mansehra Express</h2>
+      <p class="section-body">
+        Have questions about your journey? Reach us by phone, WhatsApp, or email.
+      </p>
+      <div class="contact-grid">
+
+        <!-- Phone -->
+        <a class="contact-card" href="tel:+923133334227">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.07 2.18 2 2 0 012.06 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+          </div>
+          <span class="contact-card-label">Phone</span>
+          <span class="contact-card-value">+92 313 333 4227</span>
+        </a>
+
+        <!-- WhatsApp -->
+        <a class="contact-card" href="https://wa.me/923133334227" target="_blank" rel="noopener">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          </div>
+          <span class="contact-card-label">WhatsApp</span>
+          <span class="contact-card-value">+92 313 333 4227<br /><small style="opacity:0.6;font-size:0.8rem;">Tap to chat</small></span>
+        </a>
+
+        <!-- Email 1 -->
+        <a class="contact-card" href="mailto:contact@ticketpakistan.com">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <span class="contact-card-label">Email</span>
+          <span class="contact-card-value">contact@ticketpakistan.com</span>
+        </a>
+
+        <!-- Email 2 -->
+        <a class="contact-card" href="mailto:muhammadusman@ticketpakistan.com">
+          <div class="contact-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <span class="contact-card-label">CEO, TicketPakistan</span>
+          <span class="contact-card-value">muhammadusman@<br />ticketpakistan.com</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Mansehra <span>Express</span></div>
+    <span class="footer-copy">&copy; 2025 Mansehra Express. All rights reserved.</span>
+    <a class="footer-link" href="https://ticketpakistan.com/" target="_blank" rel="noopener">Tickets via TicketPakistan.com &rarr;</a>
+  </footer>
+
+  <script>
+    // Intersection observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.animationPlayState = 'running';
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.animate').forEach(el => {
+      el.style.animationPlayState = 'paused';
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
