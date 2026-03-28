@@ -69,13 +69,35 @@
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      background: var(--green-dark);
       overflow: hidden;
       padding-top: 5rem;
     }
 
-    /* geometric pattern overlay */
+    /* landmark background photo */
+    .hero-bg {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 30%;
+      display: block;
+      z-index: 0;
+    }
+
+    /* dark overlay so text stays readable */
     .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        105deg,
+        rgba(10,36,22,0.88) 0%,
+        rgba(10,36,22,0.72) 50%,
+        rgba(10,36,22,0.55) 100%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* geometric pattern overlay */
+    .hero::after {
       content: '';
       position: absolute; inset: 0;
       background-image:
@@ -93,6 +115,7 @@
           rgba(245,166,35,0.04) 38px,
           rgba(245,166,35,0.04) 40px
         );
+      z-index: 1;
       pointer-events: none;
     }
 
@@ -505,6 +528,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <img class="hero-bg" src="faisal_mosque.jpg" alt="Faisal Mosque, Islamabad" />
 
     <div class="hero-content">
       <div class="hero-eyebrow">Long-Distance Coach Service</div>
@@ -566,18 +590,6 @@
       Trusted by Thousands
     </div>
   </div>
-
-  <!-- LANDMARK PHOTO -->
-  <section class="landmark">
-    <img src="faisal_mosque.jpg" alt="Faisal Mosque, Islamabad — a landmark on Mansehra Express routes" loading="lazy" />
-    <div class="landmark-info">
-      <div>
-        <span class="landmark-label">Pakistan Landmark</span>
-        <span class="landmark-name">Faisal Mosque<br />Islamabad</span>
-      </div>
-      <span class="landmark-credit">On the Mansehra Express route</span>
-    </div>
-  </section>
 
   <!-- BOOKING SECTION -->
   <section class="booking-section">
